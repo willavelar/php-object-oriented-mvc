@@ -2,17 +2,19 @@ version: "3.9"
 
 services:
 
-  backend:
+  apache:
     build:
-      context: ./backend
-    depends_on:
-      - db
+      context: ./apache
+    container_name: php
+    restart: always
     ports:
-      - "8080:8080"
+      - '80:80'
     volumes:
       - ./backend:/var/www/html
-    networks:
-      - backend
+    depends_on:
+      - db
+    links:
+      - db
 
   db:
     image: mariadb:10.3
@@ -20,17 +22,11 @@ services:
     volumes:
       - db-data:/var/lib/mysql
       - ./mysql:/docker-entrypoint-initdb.d
-    networks:
-      - backend
     ports:
       - "3306:3306"
     environment:
       MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     restart: unless-stopped
-
-
-networks:
-  backend:
 
 volumes:
   db-data:
