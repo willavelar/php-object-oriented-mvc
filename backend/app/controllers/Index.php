@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
-class Index
+use App\Libraries\Controller;
+
+class Index extends Controller
 {
     public function index()
     {
-
+        $this->view('index', ['title' => 'Welcome']);
     }
 }

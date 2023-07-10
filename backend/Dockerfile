@@ -1,9 +1,10 @@
-FROM php:7.4-cli-alpine
+FROM php:7.4-fpm
 
 WORKDIR /var/www/html
 
-RUN docker-php-ext-install pdo pdo_mysql mysqli && \
-    docker-php-ext-enable mysqli
+RUN apt-get update \
+     && docker-php-ext-install mysqli pdo pdo_mysql \
+     && docker-php-ext-enable pdo_mysql
 
 COPY . ./
 

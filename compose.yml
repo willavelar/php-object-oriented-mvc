@@ -11,23 +11,38 @@ services:
       - '80:80'
     volumes:
       - ./backend:/var/www/html
-    depends_on:
-      - db
-    links:
-      - db
+    networks:
+      net:
+        ipv4_address: ${APACHE_IPV4_ADDRESS}
+
 
   db:
     image: mariadb:10.3
+    container_name: db
     env_file: .env
     volumes:
       - db-data:/var/lib/mysql
       - ./mysql:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"
+      - ${DB_PORT}:3306
     environment:
       MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+      net:
+        ipv4_address: ${DB_IPV4_ADDRESS}
+
     restart: unless-stopped
 
 volumes:
   db-data:
     driver: local
+
+networks:
+  net:
+    name: net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${DOCKER_NETWORK_INTERVAL_SUBNET}

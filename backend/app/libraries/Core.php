@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Libraries;
+
 class Core {
     protected $currentController = 'Index';
     protected $currentMethod = 'index';
