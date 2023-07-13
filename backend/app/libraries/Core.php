@@ -3,9 +3,9 @@
 namespace App\Libraries;
 
 class Core {
-    protected $currentController = 'Index';
-    protected $currentMethod = 'index';
-    protected $params = [];
+    protected string $currentController = 'Index';
+    protected string $currentMethod = 'index';
+    protected array $params = [];
 
     public function __construct()
     {

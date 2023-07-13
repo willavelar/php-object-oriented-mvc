@@ -4,8 +4,8 @@ services:
 
   apache:
     build:
-      context: ./apache
-    container_name: php
+      context: ./backend
+    container_name: php-apache
     restart: always
     ports:
       - '80:80'
@@ -15,14 +15,12 @@ services:
       net:
         ipv4_address: ${APACHE_IPV4_ADDRESS}
 
-
   db:
     image: mariadb:10.3
     container_name: db
     env_file: .env
     volumes:
       - db-data:/var/lib/mysql
-      - ./mysql:/docker-entrypoint-initdb.d
     ports:
       - ${DB_PORT}:3306
     environment:

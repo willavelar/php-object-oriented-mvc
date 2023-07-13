@@ -8,19 +8,19 @@ use PDOStatement;
 
 class Database {
 
-    private $host = DB_HOST;
-    private $user = DB_USER;
-    private $pass = DB_PASS;
-    private $port = DB_PORT;
-    private $dbname = DB_NAME;
+    private string $host = DB_HOST;
+    private string $user = DB_USER;
+    private string $pass = DB_PASS;
+    private string $port = DB_PORT;
+    private string $dbname = DB_NAME;
 
-    private $dbh;
+    private PDO $dbh;
 
     /**
      * @var PDOStatement
      */
-    private $stmt;
-    private $error;
+    private PDOStatement $stmt;
+    private string $error;
 
     public function __construct()
     {
@@ -65,7 +65,7 @@ class Database {
         $this->stmt->bindValue($param, $value, $type);
     }
 
-    public function execute()
+    public function execute(): bool
     {
         return $this->stmt->execute();
     }
@@ -84,7 +84,7 @@ class Database {
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    public function rowCount()
+    public function rowCount(): int
     {
         return $this->stmt->rowCount();
     }
