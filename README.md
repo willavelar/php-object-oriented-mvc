@@ -27,4 +27,4 @@ docker compose up -d
 
 _________________
 
-*All examples of Movels, Views and Controllers are in the project*
+*All examples of Models, Views and Controllers are in the project*
