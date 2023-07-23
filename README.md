@@ -2,7 +2,7 @@
 
 ![Docker Version Support](https://img.shields.io/badge/docker-23.0%2B-brightgreen.svg?style=flat-square)
 
-It is an example of using a standard mvc in php7.4 but with installation completely via docker
+It is an example of using a mvc pattern in php7.4 but with installation completely via docker
 
 ## Execution
 
